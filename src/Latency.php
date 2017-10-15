@@ -42,10 +42,8 @@ class Latency
         $startTime = microtime(true);
         $response = $next($request, $response);
 
-        $latency = microtime(true) - $startTime;
-        error_log(sprintf("latency: %f, endpoint: %s", $latency, $request->getUri()->getPath()));
         $this->latencyHistogram->observe(
-            $latency,
+            microtime(true) - $startTime,
             [$request->getUri()->getPath()]
         );
 
