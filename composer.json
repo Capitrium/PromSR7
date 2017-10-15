@@ -1,0 +1,30 @@
+{
+	"name": "capitrium/promsr7",
+	"description": "PSR7 Middleware for generating request latency metrics in Prometheus format.",
+	"keywords": [
+		"psr7",
+		"prometheus",
+		"middleware"
+	],
+	"homepage": "https://github.com/Capitrium/PromSR7",
+	"authors": [
+		{
+			"name": "Capitrium"
+		}
+	],
+	"require": {
+		"psr/http-message": "^1.0",
+		"Jimdo/prometheus_client_php": "dev-apcu"
+	},
+	"autoload": {
+		"psr-4": {
+			"PromSR7\\": "src"
+		}
+	},
+	"repositories": [
+		{
+			"type": "vcs",
+			"url": "https://github.com/JWZH/prometheus_client_php"
+		}
+	]
+}
