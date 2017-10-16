@@ -22,7 +22,7 @@ class Latency
             $namespace,
             'request_duration_seconds',
             'The duration of requests, in seconds',
-            ['path'],
+            ['path', 'method'],
             $buckets
         );
     }
@@ -44,7 +44,7 @@ class Latency
 
         $this->latencyHistogram->observe(
             microtime(true) - $startTime,
-            [$request->getUri()->getPath()]
+            [$pathLabel, $request->getMethod()]
         );
 
         return $response;
