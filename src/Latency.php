@@ -13,10 +13,16 @@ class Latency
      */
     private $latencyHistogram;
 
+    /**
+     * @var array
+     */
+    private $filters;
+
     public function __construct(
         CollectorRegistry $collectorRegistry,
         string $namespace,
-        array $buckets = [0.005, 0.01, 0.05, 0.10, 0.25, 0.40, 0.70, 1]
+        array $buckets = [0.005, 0.01, 0.05, 0.10, 0.25, 0.40, 0.70, 1],
+        array $filters = []
     ) {
         $this->latencyHistogram = $collectorRegistry->getOrRegisterHistogram(
             $namespace,
@@ -25,6 +31,7 @@ class Latency
             ['path', 'method'],
             $buckets
         );
+        $this->filters = $filters;
     }
 
     /**
@@ -42,6 +49,11 @@ class Latency
         $startTime = microtime(true);
         $response = $next($request, $response);
 
+        $pathLabel = preg_replace(
+            array_keys($this->filters),
+            array_values($this->filters),
+            $request->getUri()->getPath()
+        );
         $this->latencyHistogram->observe(
             microtime(true) - $startTime,
             [$pathLabel, $request->getMethod()]
