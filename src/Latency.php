@@ -21,8 +21,8 @@ class Latency
     public function __construct(
         CollectorRegistry $collectorRegistry,
         string $namespace,
-        array $buckets = [0.005, 0.01, 0.05, 0.10, 0.25, 0.40, 0.70, 1],
-        array $filters = []
+        array $filters = [],
+        array $buckets = [0.005, 0.01, 0.05, 0.10, 0.25, 0.40, 0.70, 1]
     ) {
         $this->latencyHistogram = $collectorRegistry->getOrRegisterHistogram(
             $namespace,
