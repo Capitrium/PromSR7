@@ -20,11 +20,5 @@
 		"psr-4": {
 			"PromSR7\\": "src"
 		}
-	},
-	"repositories": [
-		{
-			"type": "vcs",
-			"url": "https://github.com/JWZH/prometheus_client_php"
-		}
-	]
+	}
 }
